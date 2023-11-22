@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './normal.css'
 import './App.css'
 
@@ -26,6 +26,8 @@ function App() {
         message: chatLog.map((message) => message.message).join(),
       }),
     })
+
+    const data = await response.json()
   }
 
   return (
