@@ -4,7 +4,16 @@ import './App.css'
 
 function App() {
   const [input, setInput] = useState()
-  const [chatLog, setChatLog] = useState([{}])
+  const [chatLog, setChatLog] = useState([
+    {
+      user: 'gpt',
+      message: 'how can i help you',
+    },
+    {
+      user: 'me',
+      message: 'i want to use chatgpt today',
+    },
+  ])
 
   async function handleSubmit(e) {
     e.preventDefault()
