@@ -1,10 +1,15 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import './normal.css'
 import './App.css'
 
 function App() {
+  const [input, setInput] = useState()
+  const [chatLog, setChatLog] = useState([{}])
+
   async function handleSubmit(e) {
     e.preventDefault()
+    setChatLog([...chatLog, { user: 'me', message: `${input}` }])
+    setInput('')
   }
 
   return (
@@ -18,12 +23,9 @@ function App() {
 
         <section className='chatbox'>
           <div className='chat-log'>
-            <div className='chat-message'>
-              <div className='chat-message-center'>
-                <div className='avatar'></div>
-                <div className='message'>Hello World</div>
-              </div>
-            </div>
+            {chatLog.map((message, index) => (
+              <ChatMessage key={index} message={message} />
+            ))}
 
             <div className='chat-message chatgpt'>
               <div className='chat-message-center'>
@@ -32,14 +34,30 @@ function App() {
               </div>
             </div>
           </div>
+
           <div className='chat-input-holder'>
             <form onSubmit={handleSubmit}>
-              <input className='chat-input-textarea'></input>
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                className='chat-input-textarea'
+              ></input>
             </form>
           </div>
         </section>
       </div>
     </>
+  )
+}
+
+const ChatMessage = ({ message }) => {
+  return (
+    <div className={`chat-message ${message.user === 'gpt' && 'chatgpt'}`}>
+      <div className='chat-message-center'>
+        <div className={`avatar ${message.user === 'gpt' && 'chatgpt'}`}></div>
+        <div className='message'>{message.message}</div>
+      </div>
+    </div>
   )
 }
 
