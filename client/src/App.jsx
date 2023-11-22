@@ -19,6 +19,13 @@ function App() {
     e.preventDefault()
     setChatLog([...chatLog, { user: 'me', message: `${input}` }])
     setInput('')
+    const response = await fetch('http://localhost:3000/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: chatLog.map((message) => message.message).join(),
+      }),
+    })
   }
 
   return (
