@@ -3,6 +3,10 @@ import './normal.css'
 import './App.css'
 
 function App() {
+  async function handleSubmit(e) {
+    e.preventDefault()
+  }
+
   return (
     <>
       <div className='App'>
@@ -29,7 +33,9 @@ function App() {
             </div>
           </div>
           <div className='chat-input-holder'>
-            <textarea rows='1' className='chat-input-textarea'></textarea>
+            <form onSubmit={handleSubmit}>
+              <input className='chat-input-textarea'></input>
+            </form>
           </div>
         </section>
       </div>
